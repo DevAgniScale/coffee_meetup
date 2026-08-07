@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic AI · Coffee Meetup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #FFFBF6;
+    --bg-alt: #FFF1E1;
+    --orange: #E8590C;
+    --orange-deep: #B8430A;
+    --orange-mid: #FF8C42;
+    --amber: #FFC978;
+    --espresso: #2B1B12;
+    --espresso-soft: #6B5545;
+    --white: #FFFFFF;
+    --discord: #5865F2;
+    --discord-soft: #EEF0FE;
+    --line: rgba(43,27,18,0.12);
+    --radius: 18px;
+    --display: 'Bricolage Grotesque', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  *{margin:0; padding:0; box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--bg);
+    color:var(--espresso);
+    font-family:var(--body);
+    line-height:1.5;
+    overflow-x:hidden;
+  }
+
+  img,svg{display:block; max-width:100%;}
+
+  a{color:inherit;}
+
+  /* ---------- progress bar (coffee fill) ---------- */
+  #progress-track{
+    position:fixed; top:0; left:0; width:100%; height:5px;
+    background:rgba(232,89,12,0.12); z-index:999;
+  }
+  #progress-fill{
+    height:100%; width:0%;
+    background:linear-gradient(90deg, var(--orange-deep), var(--orange), var(--amber));
+    transition: width 0.08s linear;
+  }
+
+  section{
+    padding: 88px 6vw;
+    position:relative;
+  }
+  section.alt{background:var(--bg-alt);}
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:0.78rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--orange-deep);
+    font-weight:700;
+    margin-bottom:14px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{
+    content:""; display:inline-block; width:22px; height:2px; background:var(--orange);
+  }
+
+  h1,h2,h3{
+    font-family:var(--display);
+    font-weight:700;
+    color:var(--espresso);
+    letter-spacing:-0.01em;
+  }
+
+  h2{font-size: clamp(1.8rem, 3.4vw, 2.7rem); margin-bottom:16px;}
+
+  .lede{
+    font-size:1.08rem;
+    color:var(--espresso-soft);
+    max-width:640px;
+    margin-bottom:40px;
+  }
+
+  .reveal{
+    opacity:0; transform:translateY(24px);
+    transition:opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ================= HERO ================= */
+  #hero{
+    min-height:96vh;
+    display:flex; flex-direction:column; align-items:flex-start; justify-content:center;
+    padding-top:120px;
+    background:
+      radial-gradient(circle at 85% 12%, rgba(255,201,120,0.5), transparent 45%),
+      radial-gradient(circle at 8% 90%, rgba(232,89,12,0.12), transparent 40%),
+      var(--bg);
+  }
+  .hero-top{
+    display:flex; align-items:center; gap:16px; margin-bottom:34px;
+  }
+  .cup{
+    width:46px; height:46px;
+  }
+  .steam-line{
+    stroke:var(--orange);
+    stroke-width:3;
+    stroke-linecap:round;
+    fill:none;
+    stroke-dasharray:10 10;
+    animation: steam 2.6s ease-in-out infinite;
+    transform-origin:center;
+  }
+  .steam-line:nth-child(2){animation-delay:0.4s;}
+  .steam-line:nth-child(3){animation-delay:0.8s;}
+  @keyframes steam{
+    0%{opacity:0; transform:translateY(4px);}
+    30%{opacity:1;}
+    100%{opacity:0; transform:translateY(-10px);}
+  }
+
+  h1.hero-title{
+    font-size: clamp(2.6rem, 6.4vw, 5.2rem);
+    line-height:1.02;
+    max-width:16ch;
+  }
+  h1.hero-title .accent{color:var(--orange);}
+
+  .hero-sub{
+    margin-top:26px;
+    font-size:1.2rem;
+    color:var(--espresso-soft);
+    max-width:520px;
+  }
+
+  .hero-tag{
+    margin-top:40px;
+    font-family:var(--mono);
+    font-size:0.85rem;
+    color:var(--orange-deep);
+    background:var(--white);
+    border:1px solid var(--line);
+    padding:10px 16px;
+    border-radius:999px;
+  }
+
+  /* ================= BIG STAT ================= */
+  .stat-grid{
+    display:grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap:40px;
+    align-items:center;
+  }
+  .stat-big{
+    font-family:var(--display);
+    font-weight:800;
+    font-size: clamp(3.2rem, 9vw, 6.5rem);
+    color:var(--orange);
+    line-height:0.95;
+  }
+  .stat-cap{
+    font-size:1.05rem;
+    color:var(--espresso-soft);
+    margin-top:14px;
+    max-width:420px;
+  }
+  .stat-side{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:28px;
+  }
+  .stat-side .num{
+    font-family:var(--mono); font-weight:700; font-size:1.9rem; color:var(--orange-deep);
+  }
+  .stat-side .cap{color:var(--espresso-soft); font-size:0.95rem; margin-top:6px;}
+
+  /* ================= TABLE ================= */
+  .table-wrap{
+    overflow-x:auto;
+    border-radius:var(--radius);
+    border:1px solid var(--line);
+    background:var(--white);
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:560px;
+  }
+  th{
+    font-family:var(--mono);
+    font-size:0.78rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    text-align:left;
+    padding:16px 20px;
+    color:var(--white);
+    background:var(--orange);
+  }
+  td{
+    padding:18px 20px;
+    border-top:1px solid var(--line);
+    font-size:0.96rem;
+    vertical-align:top;
+  }
+  td.tool{
+    font-family:var(--mono);
+    color:var(--orange-deep);
+    font-weight:700;
+    white-space:nowrap;
+  }
+  tr:hover td{background:var(--bg-alt);}
+
+  /* ================= CARDS ================= */
+  .card-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:20px;
+  }
+  .card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:26px;
+    transition:transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 14px 28px rgba(232,89,12,0.12);
+  }
+  .card .tag{
+    font-family:var(--mono); font-size:0.75rem; color:var(--orange-deep);
+    text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px; display:block;
+  }
+  .card h3{font-size:1.05rem; margin-bottom:8px;}
+  .card p{color:var(--espresso-soft); font-size:0.92rem;}
+
+  /* ================= JOBS NUMBERS ================= */
+  .job-numbers{
+    display:flex; flex-wrap:wrap; gap:18px; margin-bottom:34px;
+  }
+  .job-box{
+    flex:1; min-width:180px;
+    background:var(--white); border:1px solid var(--line); border-radius:var(--radius);
+    padding:24px; text-align:center;
+  }
+  .job-box .n{font-family:var(--mono); font-weight:700; font-size:2rem;}
+  .job-box.up .n{color:#2E7D32;}
+  .job-box.down .n{color:var(--orange-deep);}
+  .job-box.net .n{color:var(--espresso);}
+  .job-box .lbl{font-size:0.85rem; color:var(--espresso-soft); margin-top:6px;}
+
+  .role-grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:14px;
+  }
+  .role-chip{
+    background:var(--bg-alt); border:1px dashed var(--orange-mid);
+    border-radius:12px; padding:16px 18px;
+    font-family:var(--mono); font-size:0.88rem; color:var(--espresso);
+  }
+
+  /* ================= EXPECT ================= */
+  .quote-block{
+    background:var(--espresso); color:var(--bg);
+    border-radius:var(--radius);
+    padding:40px;
+    font-family:var(--display);
+    font-size:clamp(1.2rem,2.6vw,1.7rem);
+    line-height:1.4;
+  }
+  .quote-block span{color:var(--amber);}
+
+  /* ================= WORKFLOW (horizontal) ================= */
+  #workflow{background:var(--discord-soft);}
+  .discord-badge{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--discord); color:white;
+    font-family:var(--mono); font-size:0.78rem; font-weight:700;
+    padding:8px 14px; border-radius:999px; margin-bottom:20px;
+  }
+  .flow-row{
+    display:flex; overflow-x:auto; gap:0; padding-bottom:20px;
+    scroll-snap-type:x proximity;
+  }
+  .flow-step{
+    scroll-snap-align:start;
+    min-width:210px; max-width:210px;
+    background:var(--white); border:2px solid var(--discord);
+    border-radius:16px; padding:20px; margin-right:26px;
+    position:relative; flex-shrink:0;
+  }
+  .flow-step:last-child{margin-right:0;}
+  .flow-step::after{
+    content:"→";
+    position:absolute; right:-24px; top:50%; transform:translateY(-50%);
+    color:var(--discord); font-size:1.4rem; font-weight:700;
+  }
+  .flow-step:last-child::after{content:"";}
+  .flow-num{
+    font-family:var(--mono); font-weight:700; color:var(--discord);
+    font-size:0.85rem; margin-bottom:10px;
+  }
+  .flow-step p{font-size:0.9rem; color:var(--espresso-soft);}
+
+  /* ================= PLANNING ================= */
+  .plan-box{
+    display:flex; gap:24px; align-items:flex-start;
+    background:var(--white); border:1px solid var(--line); border-radius:var(--radius);
+    padding:30px; max-width:760px;
+  }
+  .plan-box .x{
+    font-family:var(--mono); color:var(--orange); font-size:1.4rem; font-weight:700;
+  }
+
+  /* ================= DEMO ================= */
+  #demo{background:var(--espresso); color:var(--bg);}
+  #demo .eyebrow{color:var(--amber);}
+  #demo h2{color:var(--white);}
+  .terminal{
+    background:#1A100A; border-radius:14px; border:1px solid rgba(255,255,255,0.1);
+    padding:26px 28px; font-family:var(--mono); font-size:0.92rem; color:#FFD9A8;
+    max-width:600px;
+  }
+  .terminal .line{margin-bottom:8px;}
+  .terminal .prompt{color:var(--orange-mid);}
+  .cursor{
+    display:inline-block; width:8px; height:16px; background:var(--amber);
+    animation: blink 1s steps(1) infinite; vertical-align:middle; margin-left:4px;
+  }
+  @keyframes blink{50%{opacity:0;}}
+
+  /* ================= CLOSING ================= */
+  .close-grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px;
+  }
+  .close-card{
+    background:var(--bg-alt); border-radius:var(--radius); padding:26px;
+    border-top:4px solid var(--orange);
+  }
+  .close-card .step{
+    font-family:var(--mono); color:var(--orange-deep); font-size:0.8rem; font-weight:700; margin-bottom:10px;
+  }
+  .close-card p{font-size:0.92rem; color:var(--espresso-soft);}
+
+  footer{
+    background:var(--espresso); color:var(--bg);
+    padding:60px 6vw; text-align:center;
+  }
+  footer h3{color:var(--white); font-size:1.6rem; margin-bottom:10px;}
+  footer p{color:rgba(255,251,246,0.65); font-family:var(--mono); font-size:0.9rem;}
+
+  @media (max-width:720px){
+    section{padding:64px 6vw;}
+    .stat-grid{grid-template-columns:1fr;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+    html{scroll-behavior:auto;}
+  }
+
+  :focus-visible{outline:3px solid var(--orange); outline-offset:3px;}
+</style>
+</head>
+<body>
+
+<div id="progress-track"><div id="progress-fill"></div></div>
+
+<!-- ================= HERO ================= -->
+<section id="hero">
+  <div class="hero-top">
+    <svg class="cup" viewBox="0 0 60 60" fill="none">
+      <path class="steam-line" d="M20 20 C20 15, 25 15, 25 10" />
+      <path class="steam-line" d="M30 20 C30 15, 35 15, 35 10" />
+      <path class="steam-line" d="M40 20 C40 15, 45 15, 45 10" />
+      <path d="M12 24 H42 L39 46 C38 50 34 52 27 52 C20 52 16 50 15 46 Z" stroke="#E8590C" stroke-width="3" fill="#FFF1E1"/>
+      <path d="M42 28 H48 C52 28 52 38 46 38 H41" stroke="#E8590C" stroke-width="3" fill="none"/>
+    </svg>
+    <span class="eyebrow" style="margin:0;">Coffee Meetup · Agentic AI</span>
+  </div>
+  <h1 class="hero-title">Let's brew an <span class="accent">AI Agent</span> together</h1>
+  <p class="hero-sub">Grab your coffee. In the next 30 minutes, we build a real AI agent — and talk about what agentic AI means for jobs, companies, and you.</p>
+  <div class="hero-tag">☕ scroll down to start</div>
+</section>
+
+<!-- ================= BIG STAT ================= -->
+<section id="stats">
+  <div class="eyebrow reveal">01 · The Money</div>
+  <div class="stat-grid reveal">
+    <div>
+      <div class="stat-big" data-count="2.6" data-suffix="T">$0T</div>
+      <p class="stat-cap">Companies spent this much on AI in 2026 — 47% more than last year. Almost everyone is investing.</p>
+    </div>
+    <div class="stat-side">
+      <div class="num" data-count="200" data-prefix="$" data-suffix="B">$0B</div>
+      <div class="cap">Agentic AI alone — up 141% in just one year. It's the fastest-growing part of AI.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMPANIES TABLE ================= -->
+<section class="alt" id="companies">
+  <div class="eyebrow reveal">02 · Who's Using It</div>
+  <h2 class="reveal">Real companies. Real agents.</h2>
+  <p class="lede reveal">These aren't experiments. These agents work every single day.</p>
+  <div class="table-wrap reveal">
+    <table>
+      <tr><th>Company</th><th>Tool</th><th>What it does</th></tr>
+      <tr><td>Zomato (Eternal)</td><td class="tool">Nugget</td><td>Handles 15M+ chats a month for Zomato, Blinkit & Hyperpure. Solves 80% on its own.</td></tr>
+      <tr><td>IBM</td><td class="tool">AskHR</td><td>Answers employee HR questions — onboarding, policies — no human needed.</td></tr>
+      <tr><td>Klarna</td><td class="tool">In-house agent</td><td>Now handles 70% of all customer chats.</td></tr>
+      <tr><td>Air India</td><td class="tool">AI.g</td><td>Solves booking, baggage & refund questions.</td></tr>
+      <tr><td>Wendy's</td><td class="tool">FreshAI</td><td>Takes your order at the drive-thru.</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ================= JOBS SHIFT (coding) ================= -->
+<section id="coding">
+  <div class="eyebrow reveal">03 · Even Coding Is Changing</div>
+  <h2 class="reveal">AI isn't just answering chats. It's writing code.</h2>
+  <p class="lede reveal">Tools like Lovable, Cursor and Claude can now build a whole frontend by themselves.</p>
+  <div class="card-grid reveal">
+    <div class="card">
+      <span class="tag">By 2028</span>
+      <h3>75% of engineers</h3>
+      <p>will be using AI coding agents at work.</p>
+    </div>
+    <div class="card">
+      <span class="tag">In 2023</span>
+      <h3>Under 10%</h3>
+      <p>were using them. It's a huge jump in just a few years.</p>
+    </div>
+    <div class="card">
+      <span class="tag">What's changing</span>
+      <h3>The developer's job</h3>
+      <p>People now guide the AI, instead of typing every single line.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= JOBS NUMBERS ================= -->
+<section class="alt" id="jobs">
+  <div class="eyebrow reveal">04 · Jobs Lost vs Jobs Made</div>
+  <h2 class="reveal">AI will end some jobs. It will also create new ones.</h2>
+  <div class="job-numbers reveal">
+    <div class="job-box up"><div class="n">+170M</div><div class="lbl">new jobs by 2030</div></div>
+    <div class="job-box down"><div class="n">−92M</div><div class="lbl">jobs disappear</div></div>
+    <div class="job-box net"><div class="n">+78M</div><div class="lbl">net jobs gained</div></div>
+  </div>
+  <p class="lede reveal">Real example: Klarna's support team went from 2,300 people to 1,600 after adding AI. But in just 2 years, 1.3M+ new AI-related jobs were also created.</p>
+  <div class="eyebrow reveal" style="margin-top:8px;">New job titles showing up now</div>
+  <div class="role-grid reveal">
+    <div class="role-chip">AI / Agent Engineer</div>
+    <div class="role-chip">Forward-Deployed Engineer</div>
+    <div class="role-chip">AI Trainer / Data Annotator</div>
+    <div class="role-chip">Agent Orchestrator</div>
+  </div>
+</section>
+
+<!-- ================= EXPECT ================= -->
+<section id="expect">
+  <div class="eyebrow reveal">05 · What Companies Want</div>
+  <div class="quote-block reveal">
+    Companies don't want a generic AI. They want an agent that knows <span>their own rules, their own data</span>, and answers only within that.
+  </div>
+</section>
+
+<!-- ================= EXAMPLES ================= -->
+<section class="alt" id="examples">
+  <div class="eyebrow reveal">06 · Seeing It In Action</div>
+  <h2 class="reveal">Two real examples</h2>
+  <div class="card-grid reveal">
+    <div class="card">
+      <span class="tag">Airline</span>
+      <h3>Air India's AI.g</h3>
+      <p>Solves 97% of questions with zero human help — and only talks about Air India, nothing else.</p>
+    </div>
+    <div class="card">
+      <span class="tag">Restaurant</span>
+      <h3>Wendy's FreshAI</h3>
+      <p>Trained only on Wendy's own menu. Won't answer random food questions outside that.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WORKFLOW ================= -->
+<section id="workflow">
+  <div class="eyebrow reveal">07 · How Our Agent Works</div>
+  <span class="discord-badge reveal">💬 Built for Discord</span>
+  <h2 class="reveal">From question to answer, step by step</h2>
+  <div class="flow-row reveal">
+    <div class="flow-step"><div class="flow-num">STEP 1</div><p>Student asks a question on Discord.</p></div>
+    <div class="flow-step"><div class="flow-num">STEP 2</div><p>Discord Bot receives the message.</p></div>
+    <div class="flow-step"><div class="flow-num">STEP 3</div><p>AI reads course_info.txt for real course data.</p></div>
+    <div class="flow-step"><div class="flow-num">STEP 4</div><p>Question + info are sent to Gemini.</p></div>
+    <div class="flow-step"><div class="flow-num">STEP 5</div><p>If found, Gemini answers from the course file.</p></div>
+    <div class="flow-step"><div class="flow-num">STEP 6</div><p>If not found, it uses general knowledge instead.</p></div>
+    <div class="flow-step"><div class="flow-num">STEP 7</div><p>Asked for API keys or secrets? AI politely refuses.</p></div>
+    <div class="flow-step"><div class="flow-num">STEP 8</div><p>Answer is sent back to the student on Discord.</p></div>
+  </div>
+</section>
+
+<!-- ================= COMPONENTS ================= -->
+<section class="alt" id="components">
+  <div class="eyebrow reveal">08 · What We Used</div>
+  <h2 class="reveal">The tools behind the agent</h2>
+  <div class="table-wrap reveal">
+    <table>
+      <tr><th>Tool</th><th>Why we used it</th></tr>
+      <tr><td class="tool">Python</td><td>The language we coded everything in.</td></tr>
+      <tr><td class="tool">Discord.py</td><td>Connects our code to Discord.</td></tr>
+      <tr><td class="tool">Google Gemini</td><td>The AI brain that writes the answers.</td></tr>
+      <tr><td class="tool">LangChain</td><td>An easy way to connect to Gemini.</td></tr>
+      <tr><td class="tool">LangGraph</td><td>Decides which step runs next.</td></tr>
+      <tr><td class="tool">course_info.txt</td><td>Our own knowledge file about the course.</td></tr>
+      <tr><td class="tool">Google Colab</td><td>Where we built and ran everything — no installs.</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ================= PLANNING ================= -->
+<section id="planning">
+  <div class="eyebrow reveal">09 · Before We Write Code</div>
+  <h2 class="reveal">Plan first. Prompt second.</h2>
+  <div class="plan-box reveal">
+    <div class="x">✕</div>
+    <p>Most people just say "build me a bot." But AI doesn't know the purpose, the workflow, or the rules unless <em>you</em> tell it. Good developers define the problem, design the workflow, pick the tools — <strong>then</strong> write the prompt. Clear planning = better AI output. That's Prompt Engineering.</p>
+  </div>
+</section>
+
+<!-- ================= DEMO ================= -->
+<section id="demo">
+  <div class="eyebrow reveal">10 · Live Demo</div>
+  <h2 class="reveal">Let's see it work — live</h2>
+  <div class="terminal reveal">
+    <div class="line"><span class="prompt">$</span> opening Google Colab...</div>
+    <div class="line"><span class="prompt">$</span> loading course_info.txt ✓</div>
+    <div class="line"><span class="prompt">$</span> connecting to Gemini ✓</div>
+    <div class="line"><span class="prompt">$</span> agent is live<span class="cursor"></span></div>
+  </div>
+</section>
+
+<!-- ================= CLOSING ================= -->
+<section class="alt" id="closing">
+  <div class="eyebrow reveal">Wrap Up</div>
+  <h2 class="reveal">So what did we really build today?</h2>
+  <div class="close-grid reveal">
+    <div class="close-card">
+      <div class="step">Not the point</div>
+      <p>It wasn't just "an AI agent." Anyone can build one of those — they're everywhere online.</p>
+    </div>
+    <div class="close-card">
+      <div class="step">The real point</div>
+      <p>Speed, clarity, and a working solution with minimum tweaking — because we planned before we coded.</p>
+    </div>
+    <div class="close-card">
+      <div class="step">The bigger picture</div>
+      <p>Real companies use many AI agents together — one plans, one retrieves, one checks, one reports. Sometimes a human approves too.</p>
+    </div>
+    <div class="close-card">
+      <div class="step">What's next</div>
+      <p>In 30 minutes, we built one small agent. In 6 weeks, we'll build a full Enterprise Agentic AI System on Google Cloud.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <h3>6 weeks. One system. Let's build it. ☕</h3>
+  <p>AGENTIC AI · COFFEE MEETUP</p>
+</footer>
+
+<script>
+  // scroll progress
+  const fill = document.getElementById('progress-fill');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    fill.style.width = scrolled + '%';
+  });
+
+  // reveal on scroll
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealEls = document.querySelectorAll('.reveal');
+  if (reduceMotion) {
+    revealEls.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+  }
+
+  // count-up numbers
+  const counters = document.querySelectorAll('[data-count]');
+  const countIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseFloat(el.dataset.count);
+        const prefix = el.dataset.prefix || '';
+        const suffix = el.dataset.suffix || '';
+        const isDecimal = target % 1 !== 0;
+        let current = 0;
+        const duration = reduceMotion ? 0 : 1200;
+        const start = performance.now();
+        function tick(now){
+          const p = duration === 0 ? 1 : Math.min((now - start) / duration, 1);
+          current = target * p;
+          el.textContent = prefix + (isDecimal ? current.toFixed(1) : Math.round(current)) + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        countIO.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(el => countIO.observe(el));
+</script>
+
+</body>
+</html>
