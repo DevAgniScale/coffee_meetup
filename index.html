@@ -221,6 +221,15 @@
   }
   tr:hover td{background:var(--bg-alt);}
 
+  /* ================= SOURCES ================= */
+  .sources-list{
+    list-style:none; margin-top:18px; padding-top:18px;
+    border-top:1px dashed var(--line);
+    font-family:var(--mono); font-size:0.78rem; color:var(--espresso-soft);
+  }
+  .sources-list li{margin-bottom:6px;}
+  .sources-list a{color:var(--orange-deep); text-decoration:underline; text-underline-offset:2px;}
+
   /* ================= CARDS ================= */
   .card-grid{
     display:grid;
@@ -250,7 +259,7 @@
     display:flex; flex-wrap:wrap; gap:18px; margin-bottom:34px;
   }
   .job-box{
-    flex:1; min-width:180px;
+    flex:0 1 260px; min-width:180px;
     background:var(--white); border:1px solid var(--line); border-radius:var(--radius);
     padding:24px; text-align:center;
   }
@@ -261,12 +270,16 @@
   .job-box .lbl{font-size:0.85rem; color:var(--espresso-soft); margin-top:6px;}
 
   .role-grid{
-    display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:14px;
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px;
   }
   .role-chip{
     background:var(--bg-alt); border:1px dashed var(--orange-mid);
     border-radius:12px; padding:16px 18px;
-    font-family:var(--mono); font-size:0.88rem; color:var(--espresso);
+    font-size:0.88rem; color:var(--espresso-soft); line-height:1.5;
+  }
+  .role-chip strong{
+    font-family:var(--mono); color:var(--espresso); font-size:0.92rem;
+    display:block; margin-bottom:6px;
   }
 
   /* ================= EXPECT ================= */
@@ -352,6 +365,51 @@
   }
   .close-card p{font-size:0.92rem; color:var(--espresso-soft);}
 
+  /* ================= INSIGHT LIST ================= */
+  .insight-list{
+    list-style:none; max-width:720px; margin-bottom:22px;
+  }
+  .insight-list li{
+    position:relative; padding-left:30px; margin-bottom:14px;
+    font-size:0.98rem; color:var(--espresso-soft); line-height:1.55;
+  }
+  .insight-list li::before{
+    content:""; position:absolute; left:0; top:8px;
+    width:10px; height:10px; border-radius:3px;
+    background:var(--orange);
+  }
+  .insight-list li strong{color:var(--espresso);}
+  .insight-note{
+    max-width:720px; background:var(--white); border:1px solid var(--line);
+    border-radius:var(--radius); padding:22px 26px;
+    font-size:0.96rem; color:var(--espresso-soft); line-height:1.6;
+  }
+
+  /* ================= OFFER ================= */
+  .offer-list{
+    list-style:none; display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:16px;
+  }
+  .offer-list li{
+    background:var(--white); border:1px solid var(--line); border-radius:14px;
+    padding:20px 22px; font-size:0.95rem; color:var(--espresso-soft);
+    line-height:1.5; position:relative; padding-left:44px;
+  }
+  .offer-list li::before{
+    content:"☕"; position:absolute; left:16px; top:18px; font-size:1rem;
+  }
+  .offer-list li strong{display:block; color:var(--espresso); font-family:var(--display); font-size:1rem; margin-bottom:4px;}
+
+  /* ================= ENTERPRISE DIAGRAM ================= */
+  #enterprise-diagram{background:var(--espresso); color:var(--bg);}
+  #enterprise-diagram .eyebrow{color:var(--amber);}
+  #enterprise-diagram h2{color:var(--white);}
+  .diagram-wrap{
+    background:#1A100A; border:1px solid rgba(255,255,255,0.1);
+    border-radius:var(--radius); padding:20px;
+  }
+
   footer{
     background:var(--espresso); color:var(--bg);
     padding:60px 6vw; text-align:center;
@@ -389,7 +447,7 @@
     <span class="eyebrow" style="margin:0;">Coffee Meetup · Agentic AI</span>
   </div>
   <h1 class="hero-title">Let's brew an <span class="accent">AI Agent</span> together</h1>
-  <p class="hero-sub">Grab your coffee. In the next 30 minutes, we build a real AI agent — and talk about what agentic AI means for jobs, companies, and you.</p>
+  <p class="hero-sub">Grab your coffee. In the next 30 minutes, we build a real AI agent, and talk about what agentic AI means for jobs, companies, and you.</p>
   <div class="hero-tag">☕ scroll down to start</div>
 </section>
 
@@ -399,25 +457,48 @@
   <div class="stat-grid reveal">
     <div>
       <div class="stat-big" data-count="2.6" data-suffix="T">$0T</div>
-      <p class="stat-cap">Companies spent this much on AI in 2026 — 47% more than last year. Almost everyone is investing.</p>
+      <p class="stat-cap">Companies spent this much on AI in 2026, 47% more than last year. Almost everyone is investing.</p>
     </div>
     <div class="stat-side">
       <div class="num" data-count="200" data-prefix="$" data-suffix="B">$0B</div>
-      <div class="cap">Agentic AI alone — up 141% in just one year. It's the fastest-growing part of AI.</div>
+      <div class="cap">Agentic AI alone, up 141% in just one year. It's the fastest-growing part of AI.</div>
     </div>
   </div>
 </section>
 
-<!-- ================= COMPANIES TABLE ================= -->
+<!-- ================= MONEY IN CONTEXT ================= -->
+<section id="money-context">
+  <div class="eyebrow reveal">02 · Putting $2.6T In Perspective</div>
+  <h2 class="reveal">$2.6T is bigger than it sounds</h2>
+  <p class="lede reveal">That's what companies spent on AI in 2026 alone, per Gartner. To make it real, here's what some of the biggest names in this space actually earned in profit last year (FY2025).</p>
+  <div class="table-wrap reveal">
+    <table>
+      <tr><th>Company</th><th>FY2025 Net Profit</th><th>What that means next to $2.6T</th></tr>
+      <tr><td>Microsoft</td><td class="tool">$101.8B</td><td>The world's most profitable software company. Global AI spend is still about 25x that.</td></tr>
+      <tr><td>Alphabet (Google)</td><td class="tool">$132.2B</td><td>Google's best year ever, and it's still under 6% of what got spent on AI in 2026.</td></tr>
+      <tr><td>Nvidia</td><td class="tool">$72.9B</td><td>Nearly all of it from selling the chips everyone else needs to build AI on.</td></tr>
+      <tr><td>IBM</td><td class="tool">$10.6B</td><td>A 76% jump from 2024, largely credited to its AI and hybrid cloud business.</td></tr>
+    </table>
+  </div>
+  <p class="lede reveal" style="margin-top:24px; margin-bottom:0;">Put together, these four companies earned about $317B in profit last year, and global AI spend in 2026 was still roughly 8x that, in a single year. Some of that answers "how much did they actually spend": Microsoft alone put $64.6B into AI infrastructure in FY2025, and Amazon, Microsoft, Google and Meta together are guiding to about $725B in combined capex for 2026. The biggest winners so far: Nvidia selling the chips, cloud giants like Microsoft, Google and Amazon renting out the compute and models, and consulting firms like IBM helping other companies actually deploy it.</p>
+  <ul class="sources-list reveal">
+    <li>Global AI spend, $2.6T in 2026, +47% YoY, Gartner (via <a href="https://memeburn.com/ai-global-funding-statistics-2026/" target="_blank" rel="noopener">Memeburn</a>)</li>
+    <li>Microsoft FY2025 net income $101.8B, capex $64.6B, <a href="https://www.microsoft.com/en-us/investor/earnings/fy-2025-q4/press-release-webcast" target="_blank" rel="noopener">Microsoft Investor Relations</a></li>
+    <li>Alphabet FY2025 net income $132.2B, <a href="https://s206.q4cdn.com/479360582/files/doc_financials/2025/q4/2025q4-alphabet-earnings-release.pdf" target="_blank" rel="noopener">Alphabet Q4 2025 earnings release</a></li>
+    <li>Nvidia FY2025 net income $72.9B, <a href="https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2025" target="_blank" rel="noopener">Nvidia Newsroom</a></li>
+    <li>IBM FY2025 net income $10.6B, <a href="https://www.marketscreener.com/news/ibm-2025-ibm-annual-report-ce7e5fdfdc80f62d" target="_blank" rel="noopener">IBM 2025 Annual Report</a></li>
+    <li>Big Tech 2026 combined capex guidance ~$725B, Gartner (via <a href="https://memeburn.com/ai-global-funding-statistics-2026/" target="_blank" rel="noopener">Memeburn</a>)</li>
+  </ul>
+</section>
 <section class="alt" id="companies">
-  <div class="eyebrow reveal">02 · Who's Using It</div>
+  <div class="eyebrow reveal">03 · Who's Using It</div>
   <h2 class="reveal">Real companies. Real agents.</h2>
   <p class="lede reveal">These aren't experiments. These agents work every single day.</p>
   <div class="table-wrap reveal">
     <table>
       <tr><th>Company</th><th>Tool</th><th>What it does</th></tr>
       <tr><td>Zomato (Eternal)</td><td class="tool">Nugget</td><td>Handles 15M+ chats a month for Zomato, Blinkit & Hyperpure. Solves 80% on its own.</td></tr>
-      <tr><td>IBM</td><td class="tool">AskHR</td><td>Answers employee HR questions — onboarding, policies — no human needed.</td></tr>
+      <tr><td>IBM</td><td class="tool">AskHR</td><td>Answers employee HR questions, onboarding, policies, no human needed.</td></tr>
       <tr><td>Klarna</td><td class="tool">In-house agent</td><td>Now handles 70% of all customer chats.</td></tr>
       <tr><td>Air India</td><td class="tool">AI.g</td><td>Solves booking, baggage & refund questions.</td></tr>
       <tr><td>Wendy's</td><td class="tool">FreshAI</td><td>Takes your order at the drive-thru.</td></tr>
@@ -425,66 +506,44 @@
   </div>
 </section>
 
-<!-- ================= JOBS SHIFT (coding) ================= -->
-<section id="coding">
-  <div class="eyebrow reveal">03 · Even Coding Is Changing</div>
-  <h2 class="reveal">AI isn't just answering chats. It's writing code.</h2>
-  <p class="lede reveal">Tools like Lovable, Cursor and Claude can now build a whole frontend by themselves.</p>
-  <div class="card-grid reveal">
-    <div class="card">
-      <span class="tag">By 2028</span>
-      <h3>75% of engineers</h3>
-      <p>will be using AI coding agents at work.</p>
-    </div>
-    <div class="card">
-      <span class="tag">In 2023</span>
-      <h3>Under 10%</h3>
-      <p>were using them. It's a huge jump in just a few years.</p>
-    </div>
-    <div class="card">
-      <span class="tag">What's changing</span>
-      <h3>The developer's job</h3>
-      <p>People now guide the AI, instead of typing every single line.</p>
-    </div>
-  </div>
-</section>
-
 <!-- ================= JOBS NUMBERS ================= -->
-<section class="alt" id="jobs">
+<section id="jobs">
   <div class="eyebrow reveal">04 · Jobs Lost vs Jobs Made</div>
   <h2 class="reveal">AI will end some jobs. It will also create new ones.</h2>
   <div class="job-numbers reveal">
-    <div class="job-box up"><div class="n">+170M</div><div class="lbl">new jobs by 2030</div></div>
-    <div class="job-box down"><div class="n">−92M</div><div class="lbl">jobs disappear</div></div>
-    <div class="job-box net"><div class="n">+78M</div><div class="lbl">net jobs gained</div></div>
+    <div class="job-box down"><div class="n">−92M</div><div class="lbl">jobs disappear by 2030</div></div>
+    <div class="job-box up"><div class="n">+316%</div><div class="lbl">growth in the agentic AI jobs market by 2030</div></div>
   </div>
-  <p class="lede reveal">Real example: Klarna's support team went from 2,300 people to 1,600 after adding AI. But in just 2 years, 1.3M+ new AI-related jobs were also created.</p>
-  <div class="eyebrow reveal" style="margin-top:8px;">New job titles showing up now</div>
+  <p class="lede reveal">Real examples: Salesforce cut 4,000 support jobs in 2025 after its CEO said AI does "50% of the work." UPS cut 32,000+ roles across 2024 to 2025 while automating hundreds of facilities. Citigroup is targeting around 20,000 cuts by end of 2026, tied to AI. Klarna cut roughly 700 support roles, then partly reversed it once service quality dropped.</p>
+  <div class="eyebrow reveal" style="margin-top:8px;">New job titles showing up now, and how fast they're hiring</div>
   <div class="role-grid reveal">
-    <div class="role-chip">AI / Agent Engineer</div>
-    <div class="role-chip">Forward-Deployed Engineer</div>
-    <div class="role-chip">AI Trainer / Data Annotator</div>
-    <div class="role-chip">Agent Orchestrator</div>
+    <div class="role-chip"><strong>AI / Agent Engineer</strong><br>~90,000 US postings in 2026, up 280% YoY. LinkedIn's #1 fastest-growing title.</div>
+    <div class="role-chip"><strong>Forward-Deployed Engineer</strong><br>Postings up 800%+ in 2025 alone. Average pay around $190K.</div>
+    <div class="role-chip"><strong>AI Trainer / Data Annotator</strong><br>Demand up 154% YoY. Market headed from ~$3.8B to $17B+ by 2030.</div>
+    <div class="role-chip"><strong>Agent Orchestrator</strong><br>Emerging role as agentic AI market grows from $7.4B (2025) toward $47B by 2030.</div>
   </div>
 </section>
 
 <!-- ================= EXPECT ================= -->
-<section id="expect">
+<section class="alt" id="expect">
   <div class="eyebrow reveal">05 · What Companies Want</div>
   <div class="quote-block reveal">
     Companies don't want a generic AI. They want an agent that knows <span>their own rules, their own data</span>, and answers only within that.
   </div>
+  <div class="quote-block reveal" style="margin-top:20px; font-size:1.1rem;">
+    More than that, they want a system that can <span>automate their actual workflow or pipeline</span>, not just answer questions on the side.
+  </div>
 </section>
 
 <!-- ================= EXAMPLES ================= -->
-<section class="alt" id="examples">
+<section id="examples">
   <div class="eyebrow reveal">06 · Seeing It In Action</div>
   <h2 class="reveal">Two real examples</h2>
   <div class="card-grid reveal">
     <div class="card">
       <span class="tag">Airline</span>
       <h3>Air India's AI.g</h3>
-      <p>Solves 97% of questions with zero human help — and only talks about Air India, nothing else.</p>
+      <p>Solves 97% of questions with zero human help, and only talks about Air India, nothing else.</p>
     </div>
     <div class="card">
       <span class="tag">Restaurant</span>
@@ -499,6 +558,7 @@
   <div class="eyebrow reveal">07 · How Our Agent Works</div>
   <span class="discord-badge reveal">💬 Built for Discord</span>
   <h2 class="reveal">From question to answer, step by step</h2>
+  <p class="lede reveal">In simple terms: it's a bot that sits inside our Discord server, reads what a student asks, checks our own course file for the real answer first, and only falls back to general knowledge if the answer isn't there. It never shares secrets, and it always replies right there in the chat.</p>
   <div class="flow-row reveal">
     <div class="flow-step"><div class="flow-num">STEP 1</div><p>Student asks a question on Discord.</p></div>
     <div class="flow-step"><div class="flow-num">STEP 2</div><p>Discord Bot receives the message.</p></div>
@@ -524,7 +584,7 @@
       <tr><td class="tool">LangChain</td><td>An easy way to connect to Gemini.</td></tr>
       <tr><td class="tool">LangGraph</td><td>Decides which step runs next.</td></tr>
       <tr><td class="tool">course_info.txt</td><td>Our own knowledge file about the course.</td></tr>
-      <tr><td class="tool">Google Colab</td><td>Where we built and ran everything — no installs.</td></tr>
+      <tr><td class="tool">Google Colab</td><td>Where we built and ran everything, no installs.</td></tr>
     </table>
   </div>
 </section>
@@ -535,14 +595,14 @@
   <h2 class="reveal">Plan first. Prompt second.</h2>
   <div class="plan-box reveal">
     <div class="x">✕</div>
-    <p>Most people just say "build me a bot." But AI doesn't know the purpose, the workflow, or the rules unless <em>you</em> tell it. Good developers define the problem, design the workflow, pick the tools — <strong>then</strong> write the prompt. Clear planning = better AI output. That's Prompt Engineering.</p>
+    <p>Most people just say "build me a bot." But AI doesn't know the purpose, the workflow, or the rules unless <em>you</em> tell it. Good developers define the problem, design the workflow, pick the tools, <strong>then</strong> write the prompt. Clear planning = better AI output. That's Prompt Engineering.</p>
   </div>
 </section>
 
 <!-- ================= DEMO ================= -->
 <section id="demo">
   <div class="eyebrow reveal">10 · Live Demo</div>
-  <h2 class="reveal">Let's see it work — live</h2>
+  <h2 class="reveal">Let's see it work, live</h2>
   <div class="terminal reveal">
     <div class="line"><span class="prompt">$</span> opening Google Colab...</div>
     <div class="line"><span class="prompt">$</span> loading course_info.txt ✓</div>
@@ -557,21 +617,112 @@
   <h2 class="reveal">So what did we really build today?</h2>
   <div class="close-grid reveal">
     <div class="close-card">
-      <div class="step">Not the point</div>
-      <p>It wasn't just "an AI agent." Anyone can build one of those — they're everywhere online.</p>
-    </div>
-    <div class="close-card">
       <div class="step">The real point</div>
-      <p>Speed, clarity, and a working solution with minimum tweaking — because we planned before we coded.</p>
+      <p>Speed, clarity, and a working solution with minimum tweaking, because we planned before we coded.</p>
     </div>
     <div class="close-card">
       <div class="step">The bigger picture</div>
-      <p>Real companies use many AI agents together — one plans, one retrieves, one checks, one reports. Sometimes a human approves too.</p>
+      <p>Real companies use many AI agents together: one plans, one retrieves, one checks, one reports. Sometimes a human approves too.</p>
     </div>
     <div class="close-card">
       <div class="step">What's next</div>
       <p>In 30 minutes, we built one small agent. In 6 weeks, we'll build a full Enterprise Agentic AI System on Google Cloud.</p>
     </div>
+  </div>
+</section>
+
+<!-- ================= WHY PLANNING WORKED ================= -->
+<section id="why-planning">
+  <div class="eyebrow reveal">11 · Why This Actually Worked</div>
+  <h2 class="reveal">Plan first, prompt second, every time</h2>
+  <ul class="insight-list reveal">
+    <li><strong>Define the problem</strong> before opening a code editor.</li>
+    <li><strong>Design the workflow</strong>: what happens, step by step.</li>
+    <li><strong>Pick the components</strong>: which tools, which model, which files.</li>
+    <li><strong>Write the security rules</strong>: what the agent must never do.</li>
+    <li><strong>Define expected behavior</strong>: what a good answer looks like.</li>
+    <li><strong>Only then, write the detailed prompt.</strong></li>
+  </ul>
+  <p class="insight-note reveal">When planning is clear, AI doesn't guess, it executes. That's why engineering always puts planning before coding. Real enterprise projects take this further: multiple files, multiple workflows, several LLMs each doing one job (one plans, one retrieves, one validates, one reports), human-in-the-loop approvals, memory, RAG, and MCP connecting external tools. Building systems like that takes deep planning and AI-first thinking, not just a good prompt.</p>
+</section>
+
+<!-- ================= WHAT WE OFFER ================= -->
+<section class="alt" id="offer">
+  <div class="eyebrow reveal">12 · What We Offer</div>
+  <h2 class="reveal">In 6 weeks, we'll get hands-on with the real stack</h2>
+  <p class="lede reveal">Not another single bot. We'll work through a multi-agent system the way enterprises actually approach it, on Google Cloud's stack.</p>
+  <ul class="offer-list reveal">
+    <li><strong>Multi-agent workflows</strong>Planning, retrieval, validation, and reporting agents working as one system.</li>
+    <li><strong>Google Cloud Platform</strong>The stack real companies deploy agents on, hands-on.</li>
+    <li><strong>Monitoring built in</strong>A way to see what your agents are actually doing.</li>
+    <li><strong>Memory, RAG & MCP</strong>Human-in-the-loop approvals and real tool connections.</li>
+    <li><strong>A skill with real runway</strong>Agentic AI is one of the fastest-growing fields in tech right now, and it's early enough that there's still a lot of room to grow into it.</li>
+  </ul>
+</section>
+
+<!-- ================= ENTERPRISE DIAGRAM ================= -->
+<section id="enterprise-diagram">
+  <div class="eyebrow reveal">13 · A Real One: Salesforce Agentforce</div>
+  <h2 class="reveal">This pattern is already running in production</h2>
+  <p class="lede reveal" style="color:rgba(255,251,246,0.7);">Salesforce's own multi-agent platform, Agentforce, is built on something called the Atlas Reasoning Engine, an orchestration layer that runs retrieval, planning, and action-taking as parallel nodes instead of one long chain. This is a simplified version of that pattern.</p>
+  <div class="diagram-wrap reveal">
+    <svg viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+      <defs>
+        <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+          <path d="M0,0 L8,3 L0,6 Z" fill="#FF8C42"/>
+        </marker>
+      </defs>
+
+      <!-- Request -->
+      <rect x="360" y="16" width="280" height="54" rx="12" fill="#2B1B12" stroke="#FF8C42" stroke-width="2"/>
+      <text x="500" y="48" text-anchor="middle" fill="#FFFBF6" font-family="JetBrains Mono, monospace" font-size="14" font-weight="700">Customer / Employee Request</text>
+
+      <path d="M500,70 L500,100" stroke="#FF8C42" stroke-width="2" marker-end="url(#arrow)"/>
+
+      <!-- Atlas -->
+      <rect x="330" y="102" width="340" height="58" rx="12" fill="#E8590C"/>
+      <text x="500" y="128" text-anchor="middle" fill="#2B1B12" font-family="JetBrains Mono, monospace" font-size="14" font-weight="700">Atlas Reasoning Engine</text>
+      <text x="500" y="146" text-anchor="middle" fill="#3a2312" font-family="Inter, sans-serif" font-size="10.5">Orchestration layer, runs nodes in parallel</text>
+
+      <path d="M420,160 L200,204" stroke="#FF8C42" stroke-width="2" marker-end="url(#arrow)"/>
+      <path d="M500,160 L500,204" stroke="#FF8C42" stroke-width="2" marker-end="url(#arrow)"/>
+      <path d="M580,160 L800,204" stroke="#FF8C42" stroke-width="2" marker-end="url(#arrow)"/>
+
+      <!-- Row of 3 parallel nodes -->
+      <rect x="40" y="206" width="260" height="70" rx="12" fill="none" stroke="#FFC978" stroke-width="2"/>
+      <text x="170" y="236" text-anchor="middle" fill="#FFC978" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700">Retrieval Node</text>
+      <text x="170" y="256" text-anchor="middle" fill="#FFD9A8" font-family="Inter, sans-serif" font-size="11">Pulls from Salesforce Data Cloud</text>
+
+      <rect x="370" y="206" width="260" height="70" rx="12" fill="none" stroke="#FFC978" stroke-width="2"/>
+      <text x="500" y="236" text-anchor="middle" fill="#FFC978" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700">Planning Node</text>
+      <text x="500" y="256" text-anchor="middle" fill="#FFD9A8" font-family="Inter, sans-serif" font-size="11">Decides which steps run next</text>
+
+      <rect x="700" y="206" width="260" height="70" rx="12" fill="none" stroke="#FFC978" stroke-width="2"/>
+      <text x="830" y="236" text-anchor="middle" fill="#FFC978" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700">Action Node</text>
+      <text x="830" y="256" text-anchor="middle" fill="#FFD9A8" font-family="Inter, sans-serif" font-size="11">Calls tools via MCP / A2A</text>
+
+      <!-- Converge down to guardrails -->
+      <path d="M170,276 L470,378" stroke="#FF8C42" stroke-width="2" marker-end="url(#arrow)"/>
+      <path d="M500,276 L500,378" stroke="#FF8C42" stroke-width="2" marker-end="url(#arrow)"/>
+      <path d="M830,276 L530,378" stroke="#FF8C42" stroke-width="2" marker-end="url(#arrow)"/>
+
+      <!-- Guardrails / HITL -->
+      <rect x="330" y="380" width="340" height="54" rx="12" fill="none" stroke="#FFFBF6" stroke-width="2" stroke-dasharray="6 4"/>
+      <text x="500" y="412" text-anchor="middle" fill="#FFFBF6" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700">Guardrails + Human-in-the-Loop Review</text>
+
+      <path d="M500,434 L500,462" stroke="#FF8C42" stroke-width="2" marker-end="url(#arrow)"/>
+
+      <!-- Response -->
+      <rect x="360" y="464" width="280" height="46" rx="10" fill="#2B1B12" stroke="#FFC978" stroke-width="2"/>
+      <text x="500" y="493" text-anchor="middle" fill="#FFFBF6" font-family="JetBrains Mono, monospace" font-size="14" font-weight="700">Response, Delivered</text>
+
+      <!-- Bottom band -->
+      <rect x="40" y="530" width="920" height="34" rx="8" fill="rgba(255,251,246,0.06)"/>
+      <text x="500" y="552" text-anchor="middle" fill="rgba(255,251,246,0.6)" font-family="JetBrains Mono, monospace" font-size="11">Salesforce Data Cloud · Flow / Apex · MCP &amp; A2A Interoperability</text>
+    </svg>
+  </div>
+  <div class="insight-note reveal" style="background:rgba(255,251,246,0.06); border-color:rgba(255,251,246,0.15); color:rgba(255,251,246,0.75); margin-top:22px;">
+    <strong style="color:#FFFBF6;">How it actually gets handled:</strong> a large retailer (10,000+ staff, roughly $2B in revenue) used this exact pattern for financial reporting. An AnalyzerAgent pulled KPIs and flagged anomalies, a NarratorAgent turned that into an executive summary, and a RiskCriticAgent checked it against compliance rules, all before a human signed off. Report time dropped from 15 days to about 35 minutes, cost per report fell from around $2,200 to about $9, and the error rate dropped from roughly 3 per report to 0.3.
   </div>
 </section>
 
